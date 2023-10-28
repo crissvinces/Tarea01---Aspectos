@@ -11,6 +11,9 @@ public class Accion implements SujetoObservable{
 	public void enlace(Observador o) {
 		observadores.add(o);
 }
+	public void RealizarAccion(){
+		notificar();
+	}
 		
 	@Override
 	public void notificar() {

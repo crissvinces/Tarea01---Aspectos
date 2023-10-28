@@ -5,6 +5,6 @@ public class Main {
 		Motor xyz = new Motor();
 		Accion gear5 = new Accion();
 		gear5.enlace(xyz);	
-	}
+		gear5.RealizarAccion();}
 	
 }
