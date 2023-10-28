@@ -1,63 +1,62 @@
 package part2;
-
-import java.awt.Color;
-import java.awt.FlowLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-
 public class Botones extends JFrame {
-	 public  Botones() {
-	    	//la ventana titulo ..
-	        setTitle("Ventana con 3 botones ");
-	        setSize(550, 320);
-	        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        setLayout(new FlowLayout());
-	//creando botones rojo verde y azul 
-	        JButton botonRojo = new JButton(" Rojo ");
-	        JButton botonVerde = new JButton(" Verde ");
-	        JButton botonAzul = new JButton(" Azul ");
-	//creando las "acciones"
-	//si se presiona el boton rojo se dira por consola eso 
-	        botonRojo.addActionListener(new ActionListener() {
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	                getContentPane().setBackground(Color.RED);
-	                System.out.println("Se cambio el color de fondo cambiado." +" Color :Rojo. ");
-	            }
-	        });
-	//si se preciona el boton verde dira por consola eso
-	        botonVerde.addActionListener(new ActionListener() {
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	                getContentPane().setBackground(Color.GREEN);
-	                System.out.println("Se cambio el color de fondo cambiado."+ " Color :Verde.");
-	            }
-	        });
-	//si se presiona el boton azul dira por consola eso
-	        botonAzul.addActionListener(new ActionListener() {
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	                getContentPane().setBackground(Color.BLUE);
-	                System.out.println("Se cambio el color de fondo cambiado."+" Color :Azul.");
-	            }
-	        });
-	//añadiendo botones en el "root"
-	        add(botonRojo);
-	        add(botonVerde);
-	        add(botonAzul);
-	    }
+    private JButton botonRojo;
+    private JButton botonVerde;
+    private JButton botonAzul;
 
-	    //main ventana
-	    public static void main(String[] args) {
-	        SwingUtilities.invokeLater(new Runnable() {
-	            public void run() {
-	                Botones ventana = new Botones();
-	                ventana.setVisible(true);
-	            }
-	        });
-	    }
+    public Botones() {
+        setTitle("Cambio de Fondo");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new FlowLayout());
+
+        botonRojo = new JButton("Rojo");
+        botonVerde = new JButton("Verde");
+        botonAzul = new JButton("Azul");
+
+        add(botonRojo);
+        add(botonVerde);
+        add(botonAzul);
+
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String color = ((JButton) e.getSource()).getText();
+                cambiarFondo(color);
+            }
+        };
+
+        botonRojo.addActionListener(actionListener);
+        botonVerde.addActionListener(actionListener);
+        botonAzul.addActionListener(actionListener);
+    }
+
+    public void cambiarFondo(String color) {
+        Color nuevoColor = Color.WHITE; // Color predeterminado (blanco)
+
+        if (color.equals("Rojo")) {
+            nuevoColor = Color.RED;
+        } else if (color.equals("Verde")) {
+            nuevoColor = Color.GREEN;
+        } else if (color.equals("Azul")) {
+            nuevoColor = Color.BLUE;
+        }
+
+        getContentPane().setBackground(nuevoColor);
+       // System.out.println("Cambiando color de fondo a: " + color);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+            	Botones ventana = new Botones();
+                ventana.setVisible(true);
+            }
+        });
+    }
 }
